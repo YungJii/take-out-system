@@ -1,0 +1,98 @@
+.headerMain {
+    background-color: rgb(30, 130, 210);
+    width: 100%;
+    // height: 10rem;
+    .headerMain-content {
+        text-align: center;
+        padding: 1rem;
+        color: #f8f8f8;
+        span {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        img {
+            border-radius: .5rem
+        }
+    }
+    .headerMain-address {
+        margin: 0 .4rem;
+    }
+}
+.activityMain {
+    margin: auto;
+    padding: 1rem;
+    .activityMain_title {
+        text-align: left;
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-top: 0rem;
+    }
+    img {
+        width: 100%;
+        height: 200px;
+        border-radius: 10px;
+    }
+}
+.recommend {
+    margin: auto;
+    .recommend_title {
+        margin: 0;
+        padding: 1rem;
+        text-align: left;
+        font-size: 1.125rem;
+        font-weight: 600;
+    }
+
+    .noMore,.loadMore{
+        display: flex;
+        justify-content: center;
+        align-items:center;
+        min-height: 3rem;
+        background-color: #fff;
+        color: #555;
+        font-size: 1rem;
+    }
+    @keyframes loadding{
+        from{transform:rotate(0)}
+        to{transform:rotate(360deg);}
+    }
+    .loadMore svg{
+        margin-right: 10px;
+        animation: loadding .8s linear infinite;
+    }
+}
+.recommend_screen {
+    display: flex;
+    justify-content: space-around;
+    .recommend_screen_cur {
+        
+    }
+    span {
+        font-size: 0.875rem;
+        font-weight: 300;
+    }
+}
+
+.returnTop{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    position: fixed;
+    right: 1.4rem;
+    bottom: 5rem;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid #999;
+    transition: opacity .3s;
+	svg{
+        height: 1.4rem;
+	}
+}
+
+.bcw100 {
+    background-color: white;
+    width: 100%;
+    margin-top: 1rem;
+}

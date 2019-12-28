@@ -1,0 +1,38 @@
+.mineMain-title {
+    height: 10%;
+    background-color: rgb(255, 255, 255);
+    h2 {
+        margin: 0;
+        padding: 1.3rem;
+        font-weight: 500;
+        font-size: 22px;
+    }
+}
+.personal-information {
+    background-color: white;
+    margin: 1rem .5rem;
+    border-radius: .5rem;
+    height: 20%;
+    box-shadow: 0px 0px 1px 0 rgba(0, 0, 0, 0.1);
+    .content {
+        float: left;
+        width: 70%;
+        height: 100%;
+        // background-color: royalblue;
+        p {
+            color: rgb(177, 177, 177);
+        }
+    }
+    .avatar {
+        float: right;
+        width: 30%;
+        height: 100%;
+        // background-color: sandybrown;
+        img {
+            margin: 1rem 0;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+    }
+}

@@ -1,0 +1,75 @@
+.orderMain-title {
+    height: 10%;
+    background-color: rgb(255, 255, 255);
+    h2 {
+        margin: 0;
+        padding: 1.3rem;
+        font-weight: 500;
+        font-size: 22px;
+    }
+}
+.orderMain-content {
+    height: auto;
+    overflow: auto;
+    background-color: rgb(248, 248, 248);
+    h1 {
+        text-align: left;
+        margin: 0 1rem;
+        padding-top: 1rem;
+        font-weight: 500;
+    }
+    .orderMain-content-card {
+        background-color: #ffffff;
+        height: 155px;
+        margin: 1rem .5rem 0 .5rem;
+        border-radius: .5rem;
+        box-shadow: 0px 0px 1px 0 rgba(0,0,0,0.1);
+        .avatar {
+            width: 20%;
+            height: 100%;
+            // background-color: royalblue;
+            float: left;
+            img {
+                border: 1px solid #efefef;
+                border-radius: .5rem;
+                margin: .5rem;
+            }
+        }
+        .details {
+            float: right;
+            width: 80%;
+            height: 100%;
+            // background-color: seagreen;
+            .state-name {
+                height: 40%;
+                border-bottom: 1px solid #efefef;
+                .name {
+                    float: left;
+                    font-weight: 600;
+                    font-size: 16px;
+                }
+                .state {
+                    float: right;
+                    margin-right: .5rem;
+                }
+                .time {
+                    text-align: left;
+                    margin-top: 0.5rem;
+                    color: #a5a5a5;
+                }
+            }
+            .name-price {
+                height: 60%;
+                // background-color: tan;
+                .name {
+                    float: left;
+                }
+                .price {
+                    float: right;
+                    font-weight: 600;
+                    margin-right: .5rem;
+                }
+            }
+        }
+    }
+}
