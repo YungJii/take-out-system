@@ -12,6 +12,13 @@ class BusinessList extends Component {
             business_details: this.props.data
         })
     }
+
+    // 跳转
+    handleClick(){
+		/*用户的地址hash和商家id*/
+		window.location.href=`/shop/${this.state.business_details.id}`;
+    }
+    
     render() { 
         let delivery_time = this.state.business_details.isOpen === 0 ?
             <div className="delivery_time">
@@ -26,9 +33,9 @@ class BusinessList extends Component {
             </div> : null
 
         return (
-            <div className="shoplist_item">
+            <div className="shoplist_item"  onClick={this.handleClick.bind(this)}>
                 <div className="shoplist_img">
-                    <img src={`http://www.system.com/${this.state.business_details.img}`} alt="" />
+                    <img src={`${window.config_url}${this.state.business_details.img}`} alt="" />
                 </div>
                 <div className="shoplist_main">
                     <h3 className="show_line_h3">

@@ -1,0 +1,35 @@
+.tabs_border_box{
+	display: flex;
+    align-items: center;
+    // margin-top: 1rem;
+}
+.tabs_body{
+}
+.tabs_border{
+	position: relative;
+	flex: 1;
+	text-align: center;
+	font-size: 1.1rem;
+	color: #9a9a9a;
+	border-bottom: .5px solid #ddd;
+	line-height: 3rem;
+	.tabs_border_tag{
+		position: relative;
+	}
+}
+.tabs_border_active{
+	color: #3190e8;
+	font-weight: 700;
+	.tabs_border_tag{
+		&::after{
+			content: "";
+			position: absolute;
+			bottom: -.7rem;
+			left: 0;
+			right: 0;
+			height: .2rem;
+			background-color: #2395ff;
+		};
+		position: relative;
+	}
+}

@@ -4,6 +4,7 @@ import Order from './Content/order/orderMain.js';
 import Mine from './Content/mine/mineMain.js';
 import Footer from './Content/footer/footer.js';
 import {BrowserRouter,Route,Switch} from 'react-router-dom';
+import ShopDetails from './Content/shop/shop.js'
 import '../scss/NavTabBar.scss';
 
 class NavTabBar extends Component {
@@ -16,8 +17,10 @@ class NavTabBar extends Component {
     componentDidMount() {
     }
 
-  
     render() {
+      const Shop=({ match })=>{
+        return <ShopDetails id={match.params.id}/>
+      }
       return (
         <BrowserRouter>
           <div>
@@ -25,6 +28,7 @@ class NavTabBar extends Component {
             <Route  path='/order' component={Order}/>
             <Route  path='/mine' component={Mine}/>
             <Switch>
+              <Route  path='/shop/:id' component={Shop}/>
               <Footer/>
             </Switch>
           </div>

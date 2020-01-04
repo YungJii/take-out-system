@@ -7,6 +7,9 @@ class App extends Component {
     super(props);
     this.state = {  }
   }
+  componentWillMount() {
+    window.config_url = 'http://www.system.com/'
+  }
   render() { 
     return ( 
       <NavTabBar/>

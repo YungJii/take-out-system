@@ -77,7 +77,9 @@ class TakeOutMain extends Component {
     // 回到顶部
     handleGoBack(){
         document.documentElement.scrollTop =  0;
-	}
+    }
+    
+    
 
     render() { 
         return ( 
