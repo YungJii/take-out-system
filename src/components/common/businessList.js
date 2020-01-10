@@ -4,10 +4,12 @@ import '../../scss/businessList.scss';
 class BusinessList extends Component {
     constructor(props) {
         super();
-        this.state = {}
+        this.state = {
+            business_details: {}
+        }
     }
     componentWillMount() {
-        // console.log(this.props.data)
+        console.log(this.props)
         this.setState({
             business_details: this.props.data
         })
@@ -31,6 +33,19 @@ class BusinessList extends Component {
             <div className="introduce">
                 <span className="introduce_box">“{this.state.business_details.introduce}”</span>
             </div> : null
+
+        
+        // 食物内容 
+        let food = this.state.business_details.food_info !== undefined ? 
+            this.state.business_details.food_info.map((value, index) => {
+                return (
+                    <div className="food_details_box">
+                        <img src={`${window.config_url}${value.img}`} alt="" className="box_img"></img>
+                        <p className="box_name">{value.name}</p>
+                        <p className="box_money">{value.money}</p>
+                    </div>
+                )
+            }) : null
 
         return (
             <div className="shoplist_item"  onClick={this.handleClick.bind(this)}>
@@ -61,6 +76,9 @@ class BusinessList extends Component {
                         <span>配送费¥{this.state.business_details.fee}</span>
                     </div>
                     {introduce}
+                    <div className="food_details">
+                        {food}
+                    </div>
                 </div>
             </div>
         );

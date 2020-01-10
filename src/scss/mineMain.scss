@@ -1,38 +1,129 @@
-.mineMain-title {
-    height: 10%;
-    background-color: rgb(255, 255, 255);
-    h2 {
-        margin: 0;
-        padding: 1.3rem;
-        font-weight: 500;
-        font-size: 22px;
-    }
-}
-.personal-information {
-    background-color: white;
-    margin: 1rem .5rem;
-    border-radius: .5rem;
-    height: 20%;
-    box-shadow: 0px 0px 1px 0 rgba(0, 0, 0, 0.1);
-    .content {
-        float: left;
-        width: 70%;
-        height: 100%;
-        // background-color: royalblue;
-        p {
-            color: rgb(177, 177, 177);
+.mine_box {
+    background-color: rgb(248, 248, 248);
+    .mineMain_title {
+        background-color: rgb(255, 255, 255);
+        h2 {
+            margin: 0;
+            padding: 1rem;
+            font-weight: 500;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+        .content_setting {
+            &:after {
+                content: '';
+                background-image: url('../assets/images/setting.png');
+                position: absolute;
+                z-index: 100;
+                right: 1rem;
+                background-size: 1.5rem 1.5rem;
+                width: 1.5rem;
+                height: 1.5rem;
+            }
         }
     }
-    .avatar {
-        float: right;
-        width: 30%;
-        height: 100%;
-        // background-color: sandybrown;
-        img {
-            margin: 1rem 0;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
+    .personal_information {
+        background-color: white;
+        margin: 1rem .5rem;
+        border-radius: .5rem;
+        display: flex;
+        box-shadow: 0px 0px 1px 0 rgba(0, 0, 0, 0.1);
+        .content {
+            float: left;
+            width: 70%;
+            height: 100%;
+            .sno_phon {
+                margin-bottom: 1rem;
+                .title {
+                    font-weight: bold;
+                }
+                span+span {
+                    margin-left: 1rem;
+                }
+            }
+            .tip {
+                color: rgb(177, 177, 177);
+            }
+        }
+        .avatar {
+            float: right;
+            width: 30%;
+            height: 100%;
+            // background-color: sandybrown;
+            img {
+                margin: 1rem 0 .5rem 0;
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+            }
+            h3 {
+                text-align: center;
+                width: 70%;
+                margin-bottom: .5rem;
+            }
+        }
+    }
+    .personal_paynecessity {
+        background-color: white;
+        margin: 1rem .5rem;
+        border-radius: .5rem;
+        box-shadow: 0px 0px 1px 0 rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        p {
+            margin-bottom: 2rem;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+        span+span {
+            margin-left: 3rem;
+        }
+        .title {
+            font-weight: bold;
+            display: inline-block;
+            width: 20%;
+        }
+        .content {
+        }
+    }
+    .personal_paypsw_perpsw {
+        background-color: white;
+        margin: 1rem .5rem;
+        border-radius: .5rem;
+        box-shadow: 0px 0px 1px 0 rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        .change_psw {
+            &:after {
+                content: '';
+                background-image: url('../assets/images/right.png');
+                position: absolute;
+                z-index: 100;
+                right: 1rem;
+                background-size: 1rem 1rem;
+                width: 1rem;
+                height: 1rem;
+            }
+            span+span {
+                margin-left: 3rem;
+            }
+            .title {
+                font-weight: bold;
+                display: inline-block;
+                width: 20%;
+            }
+        }
+    }
+    .login_out {
+        margin: auto .5rem;
+        .login_out_button{
+            width: 100%;
+            border-radius: 4PX;
+            background: #ff0000;
+            color: #fff;
+            font-size: 1.1rem;
+            line-height: 42PX;
+            outline: none;
+            border: none;
         }
     }
 }

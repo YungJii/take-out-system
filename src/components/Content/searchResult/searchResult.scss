@@ -1,0 +1,91 @@
+.search_result_box {
+    .search_bar {
+        background-color: rgb(30, 130, 210);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .am-search-synthetic-ph {
+            line-height: 2.5rem;
+        }
+        .am-search-synthetic-ph-placeholder {
+            position: absolute;
+            line-height: 2rem;
+            width: 10rem;
+            text-align: left;
+            height: 100%;
+        }
+        .am-search {
+            margin: 0;
+            width: 100%;
+        }
+        .search_bar_span {
+            margin-left: .5rem;
+            margin-top: .3rem;
+            svg {
+                width: 1rem;
+            }
+        }
+    }
+    .no_result {
+        height: 34rem;
+        height: 130vw;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        background-color: #fff;
+        .no_result_p1 {
+            margin-bottom: .2rem;
+        }
+        .no_result_p2 {
+            font-size: .9rem;
+            color: #999999;
+        }
+    }
+    .hidden {
+        display: none;
+    }
+
+    .search_result_contant {
+        background: white;
+        .recommend_title {
+            margin: 0;
+            padding: 1rem 2rem;
+            text-align: left;
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        .search_condition {
+            // background: #1e82d2;
+            display: flex;
+            justify-content: space-around;
+            padding: .5rem;
+            span {
+                height: 2rem;
+                width: 7rem;
+                line-height: 2rem;
+                background: #efefef;
+                border-radius: 1rem;
+                text-align: center;
+            }
+            .selected {
+                background: #eef5fb;
+                color: #46a8fe;
+                position: relative;
+                &:before {
+                    content: '';
+                    background-image: url('../../../assets/images/true.png');
+                    background-size: 1rem 1rem;
+                    position: absolute;
+                    width: 1rem;
+                    height: 1rem;
+                    z-index: 100;
+                    top: .5rem;
+                    left: .4rem;
+                }
+            }
+        }
+    }
+}

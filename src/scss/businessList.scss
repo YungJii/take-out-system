@@ -9,9 +9,11 @@
     border-bottom: 1px solid #f5efef;
     .shoplist_img {
         width: 30%;
-        padding: 1rem;
+        padding: 1rem .5rem;
         img {
-            width: 80%;
+            width: 4rem;
+            height: 4rem;
+            border-radius: .3rem;
             display: block;
             margin: auto;
         }
@@ -91,10 +93,38 @@
             line-height: 1.5rem;
             color: rgb(230, 127, 58);
             font-size: .8rem;
-            margin-top: .5rem;
+            margin: .7rem 0;
             .introduce_box {
                 padding: .5rem;
             }
+        }
+        .food_details {
+            overflow-x: auto;
+            display: flex;
+            .food_details_box {
+                margin-right: .5rem;
+                .box_img {
+                    width: 8rem;
+                    height: 6rem;
+                    border-radius: .3rem;
+                } 
+                .box_name {
+                    font-size: .8rem;
+                    margin: .3rem 0;
+                }
+                .box_money {
+                    color: #f60;
+                    font-weight: 600;
+                    
+                    &:before {
+                        content: "\A5";
+                    }
+                }
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+            
         }
     }
 }

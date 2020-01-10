@@ -5,6 +5,9 @@ import Mine from './Content/mine/mineMain.js';
 import Footer from './Content/footer/footer.js';
 import {BrowserRouter,Route,Switch} from 'react-router-dom';
 import ShopDetails from './Content/shop/shop.js'
+import Login from './Content/login/login.js'
+import Setting from './Content/setting/setting.js'
+import SearchResult from './Content/searchResult/searchResult.js'
 import '../scss/NavTabBar.scss';
 
 class NavTabBar extends Component {
@@ -21,6 +24,9 @@ class NavTabBar extends Component {
       const Shop=({ match })=>{
         return <ShopDetails id={match.params.id}/>
       }
+      const Search=({ match })=>{
+        return <SearchResult name={match.params.name}/>
+      }
       return (
         <BrowserRouter>
           <div>
@@ -29,6 +35,9 @@ class NavTabBar extends Component {
             <Route  path='/mine' component={Mine}/>
             <Switch>
               <Route  path='/shop/:id' component={Shop}/>
+              <Route  path='/search/:name' component={Search}/>
+              <Route  path='/login' component={Login}/>
+              <Route  path='/setting_info' component={Setting}/>
               <Footer/>
             </Switch>
           </div>

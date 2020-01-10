@@ -10,8 +10,6 @@ class Tabs extends Component {
     }
     
 	handClick(index) {
-		console.log(React.Children)
-		console.log(index)
 		this.setState({
 			current:index
 		})

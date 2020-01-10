@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import '../../../scss/shop.scss';
 import Tabs_li from './tabs.js'
 import CommoditySmart from './commoditySmart.js'
+import ShopInformationSmart from './shopInformationSmart.js'
 const axios = require('axios');
 
 class Shop extends Component {
@@ -29,7 +30,6 @@ class Shop extends Component {
             }
         })
         .then( (res) => {
-            console.log(res.data.message)
             this.setState({
                 message: res.data.message
             })
@@ -52,7 +52,7 @@ class Shop extends Component {
 			}
 		]
         return (
-            <div>
+            <div className="scrollBox">
                 <div className="shoplist_header">
                     {/* <div className='shoplist_header_bg'>
                         <div className='header_bg' style={{backgroundImage: `url(${window.config_url}${this.state.message.img})`}}>
@@ -83,7 +83,7 @@ class Shop extends Component {
                     <Tabs_li data={data}>
                             <CommoditySmart key={0} storeId={this.state.storeId} arriveMoney={this.state.message.arriveMoney}></CommoditySmart>
                             <div key={1}>321</div>
-                            <div key={2}>222</div>
+                            <ShopInformationSmart key={2} storeId={this.state.storeId}></ShopInformationSmart>
                     </Tabs_li>
             </div>
          );

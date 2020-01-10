@@ -17,12 +17,20 @@ class TakeOutMain extends Component {
         }
     }
     componentWillMount() {
+        if (localStorage.getItem('user') === null) {
+            window.location.href=`/login`;
+        }
+
         this.getBusinessList()
     }
 
     componentDidMount(){
-		// this.isUnmount=false;
+		this.isUnmount = false;
 		document.addEventListener('scroll',this._more.bind(this))
+    }
+    componentWillUnmount(){
+		this.isUnmount = true;
+		document.removeEventListener('scroll',this._more.bind(this))
 	}
 
     // 请求推荐商家列表
@@ -60,6 +68,7 @@ class TakeOutMain extends Component {
         if (this.state.noMore) {return;}
         if (document.documentElement.scrollTop > window.document.body.offsetHeight && document.documentElement.scrollTop - window.document.body.offsetHeight > 650) {
             this.flag = true
+            if(this.isUnmount) {return}
             this.setState({
                 page: this.state.page + 1
             })
