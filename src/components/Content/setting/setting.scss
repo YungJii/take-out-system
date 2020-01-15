@@ -8,6 +8,17 @@
             font-size: 1.3rem;
             text-align: center;
         }
+        nav{
+			position: absolute;
+			padding: 1rem;
+			.back{
+				display: inline-block;
+				svg{
+					width: 1.5rem;
+					height: 1.5rem;
+				}
+			}
+		}
     }
     .setting_content {
         background-color: white;

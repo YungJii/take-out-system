@@ -60,9 +60,15 @@ class Shop extends Component {
                         <nav>
                             <a href="javascript:history.back()" className='back'>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 32" version="1.1"><path fill="#fff" d="M16.552 5.633l-2.044-2.044L2.243 15.854l12.265 12.557 2.044-2.044L6.331 15.854z"/></svg>
+
                             </a>
                         </nav>
                     </div> */}
+                    <nav>
+                        <a href="/" className='back'>
+                            <svg t="1578651010018" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2250" width="200" height="200"><path d="M366.32213 511.145539l377.388162-377.387139c15.865339-15.852036 15.865339-41.571814 0-57.422828-15.864316-15.864316-41.557488-15.864316-57.421804 0l-406.100088 406.099065c-15.864316 15.852036-15.864316 41.570791 0 57.421804l406.100088 406.100088c7.93267 7.93267 18.315134 11.899004 28.711926 11.899005 10.381441 0 20.778232-3.966335 28.710902-11.899005 15.865339-15.851013 15.865339-41.571814 0-57.422827L366.32213 511.145539z" p-id="2251" fill="#2c2c2c"></path></svg>
+                        </a>
+                    </nav>
                     <div className="shoplist_header_main">
                         <div className='shoplist_header_bg'>
                             <div className='header_bg' style={{backgroundImage: `url(${window.config_url}${this.state.message.img})`}}>
@@ -81,7 +87,7 @@ class Shop extends Component {
                     </div>
                 </div>
                     <Tabs_li data={data}>
-                            <CommoditySmart key={0} storeId={this.state.storeId} arriveMoney={this.state.message.arriveMoney}></CommoditySmart>
+                            <CommoditySmart key={0} storeId={this.state.storeId} arriveMoney={this.state.message.arriveMoney} fee={this.state.message.fee}></CommoditySmart>
                             <div key={1}>321</div>
                             <ShopInformationSmart key={2} storeId={this.state.storeId}></ShopInformationSmart>
                     </Tabs_li>

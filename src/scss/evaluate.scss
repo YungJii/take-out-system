@@ -1,0 +1,104 @@
+.evaluate_box {
+    
+    .box-wrap  {
+        position: fixed;
+        overflow: auto;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+        z-index: 1001;
+        -webkit-overflow-scrolling: touch;
+        outline: 0;
+        display: flex;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.4);
+        justify-content: center;
+        transform: translateZ(1px);
+        .box_dialog {
+            width: 80vw;
+            height: 50vh;
+            border-radius: .5rem;
+            background-color: white;
+            // z-index: 1001;
+            .good {
+                color: rgb(255, 115, 28);
+            }
+            .commonly {
+                color: rgb(255, 181, 28);
+            }
+            .bad {
+                color: rgb(143, 156, 174);
+            }
+            .expression {
+                font-size: 1.3rem;
+                text-align: center;
+            }
+            .dialog_title {
+                position: relative;
+                height: 4rem;
+                display: flex;
+                justify-content: center;
+                font-size: 1.5rem;
+                align-items: center;
+                font-weight: bold;
+                .title_close {
+                    position: absolute;
+                    right: 1rem;
+                }
+            }
+            .dialog_textarea {
+                width: 90%;
+                margin: 2rem auto;
+                .am-list-item {
+                    background-color: rgb(250, 250, 250);
+                    border-radius: .5rem;
+                }
+            }
+            .dialog_submit {
+                width: 80%;
+                margin: auto;
+                .am-button-primary {
+                    background-color: rgb(103, 194, 58);
+                }
+            }
+            .activityPage_star {
+                position: relative;
+                display: inline-block;
+                .star_gery_box {
+                    display: flex;
+                    .stars_grey {
+                        background-size: 3rem 3rem;
+                        background-image: url('../assets/images/star_grey.png');
+                        width: 3rem;
+                        height: 3rem;
+                    }
+                }
+                .star_yellow_box {
+                    position: absolute;
+                    top: 0;
+                    display: flex;
+                    justify-content: center;
+                    .stars_yellow{
+                        background-size: 3rem 3rem;
+                        background-image: url('../assets/images/star_yellow.png');
+                        width: 3rem;
+                        height: 3rem;
+                    }
+                }
+                        
+            }
+        }
+    }
+    .box_mask {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        height: 100%;
+        z-index: 1000;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+}

@@ -1,0 +1,43 @@
+.tips_box {
+    // position: absolute;
+    display: flex;
+    justify-content: center;
+    .active {
+        position: absolute;
+        top: 0rem;
+        width: 60vw;
+        height: 6vh;
+        font-size: 1.2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: top 2s;
+        border: 1px solid #e3e3e3;
+        border-radius: .3rem;
+        box-shadow: 0px 0px 20px 0 rgba(0, 0, 0, 0.1);
+    }
+    .hidden {
+        position: absolute;
+        top: -8rem;
+        width: 60vw;
+        height: 6vh;
+        font-size: 1.2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: top 2s;
+        border: 1px solid #e3e3e3;
+        border-radius: .3rem;
+        box-shadow: 0px 0px 20px 0 rgba(0, 0, 0, 0.1);
+    }
+    .success {
+        color: rgb(103, 194, 58);
+        background-color: #f0f9eb;
+        border-color: #e1f3d8;
+    }
+    .fail {
+        background-color: #fdf6ec;
+        border-color: #faecd8;
+        color: #e6a23c;
+    }
+}

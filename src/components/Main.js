@@ -8,6 +8,8 @@ import ShopDetails from './Content/shop/shop.js'
 import Login from './Content/login/login.js'
 import Setting from './Content/setting/setting.js'
 import SearchResult from './Content/searchResult/searchResult.js'
+import ShopOrder from './Content/shop/shopOrder/shopOrder.js'
+import InfoTips from './common/infoTips.js'
 import '../scss/NavTabBar.scss';
 
 class NavTabBar extends Component {
@@ -30,11 +32,13 @@ class NavTabBar extends Component {
       return (
         <BrowserRouter>
           <div>
+            <InfoTips/>
             <Route exact path='/'  component={TakeOutMain}/>
             <Route  path='/order' component={Order}/>
             <Route  path='/mine' component={Mine}/>
             <Switch>
               <Route  path='/shop/:id' component={Shop}/>
+              <Route  path="/shopOrder" component={ShopOrder} />
               <Route  path='/search/:name' component={Search}/>
               <Route  path='/login' component={Login}/>
               <Route  path='/setting_info' component={Setting}/>

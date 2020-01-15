@@ -96,8 +96,8 @@
                             // alert(EXIF.pretty(this));
                             EXIF.getAllTags(this);   
                             // alert(EXIF.getTag(this, 'Orientation'));
-                            Orientation = EXIF.getTag(this, 'Orientation'); 
-							console.log('Orientation:', Orientation)
+                            // Orientation = EXIF.getTag(this, 'Orientation'); 
+							// console.log('Orientation:', Orientation)
                             if(Orientation == ""||Orientation == undefined||Orientation == null){
                                 Orientation = 1;
                             }

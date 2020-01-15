@@ -418,7 +418,15 @@
 			text-decoration: none;
 			font-size: 1rem;
 			font-weight: 700;
-			line-height: 3.4rem;;
+			line-height: 3.4rem;
+			.submit_button {
+				display: inline-block;
+				width: 100%;
+				height: 100%;
+				a {
+					color: white;
+				}
+			}
 		}
 		.isdisable{
 			background-color: #535356;

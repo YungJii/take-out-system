@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Icon } from 'antd';
+import { Toast } from 'antd-mobile';
 import Search from '../../common/Search.js';
 import Slick from './Slick.js';
 import '../../../scss/headerMain.scss';
@@ -13,15 +14,38 @@ class TakeOutMain extends Component {
             store_data: [],
             page: 1,
             noMore: false,
-            opa: true
+            opa: true,
+            message: {}
         }
     }
     componentWillMount() {
         if (localStorage.getItem('user') === null) {
             window.location.href=`/login`;
         }
-
+        if (localStorage.getItem('user_info') === null) {
+            this.handleGetInfo()
+        } else {
+            this.setState({
+                message: JSON.parse(localStorage.getItem('user_info'))
+            })
+        }
         this.getBusinessList()
+    }
+
+    // 获取个人信息
+    handleGetInfo() {
+        axios.get('/api/user/getUserInfo', {})
+        .then((res) => {
+            console.log(res.data.message)
+            if (res.data.status === 200) {
+                this.setState({
+                    message: res.data.message
+                })
+                localStorage.setItem('user_info', JSON.stringify(res.data.message))
+            } else {
+                window.location.href=`/login`;
+            }
+        })
     }
 
     componentDidMount(){
@@ -87,15 +111,19 @@ class TakeOutMain extends Component {
     handleGoBack(){
         document.documentElement.scrollTop =  0;
     }
-    
-    
 
+    handleActive() {
+        console.log('handleActive')
+        Toast.success('敬请期待', 1);
+    }
+    
     render() { 
         return ( 
             <div>
                 <div className="headerMain">
                     <div className="headerMain-content">
-                        <div><Icon type="environment"/><span className="headerMain-address">宇宙中心</span></div>
+                    {/* <div className="title"><Icon type="environment"/><span className="headerMain-address">{''}</span></div> */}
+                    <div className="title"><Icon type="environment"/><span className="headerMain-address">{this.state.message.address || ''}</span></div>
                         {/* 搜索、滚动 */}
                         <div><Search /></div>
                         <div><Slick /></div>
@@ -105,7 +133,7 @@ class TakeOutMain extends Component {
                 <div className="bcw100">
                     <div className="activityMain">
                         <p className="activityMain_title">商家活动</p>
-                        <img src={require("../../../assets/images/Advertisement/business_activity.jpg")} alt=""></img>
+                        <img src={require("../../../assets/images/Advertisement/business_activity.jpg")} alt="" onClick={this.handleActive.bind(this)}></img>
                     </div>
                 </div>
                 {/* 推荐商家 */}
@@ -122,10 +150,8 @@ class TakeOutMain extends Component {
                             {this.state.store_data.map((value,index)=>{return <BusinessList data={value} key={index}/>})}
                             {this.state.noMore?<div className='noMore'>没有更多了哦~</div> : 
                             <div className="loadMore"> 
-                                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
-                                <path d="M955.261 575.322h-126.643c-34.955 0-63.322-28.37-63.322-63.322s28.37-63.322 63.322-63.322h126.643c34.955 0 63.322 28.37 63.322 63.322s-28.37 63.322-63.322 63.322v0zM780.616 332.925c-24.696 24.696-64.842 24.696-89.538 0s-24.696-64.842 0-89.538l89.538-89.538c24.696-24.696 64.842-24.696 89.538 0s24.696 64.842 0 89.538l-89.538 89.538zM512 1018.582c-34.955 0-63.322-28.37-63.322-63.322v-126.643c0-34.955 28.37-63.322 63.322-63.322s63.322 28.37 63.322 63.322v126.643c0 34.955-28.37 63.322-63.322 63.322v0zM512 258.707c-34.955 0-63.322-28.37-63.322-63.322v-126.643c0-34.955 28.37-63.322 63.322-63.322s63.322 28.37 63.322 63.322v126.643c0 34.955-28.37 63.322-63.322 63.322v0zM243.384 870.157c-24.696 24.696-64.842 24.696-89.538 0s-24.696-64.842 0-89.538l89.538-89.538c24.696-24.696 64.842-24.696 89.538 0s24.696 64.842 0 89.538l-89.538 89.538zM243.384 332.925l-89.538-89.538c-24.696-24.696-24.696-64.842 0-89.538s64.842-24.696 89.538 0l89.538 89.538c24.696 24.696 24.696 64.842 0 89.538-24.822 24.696-64.842 24.696-89.538 0v0zM258.707 512c0 34.955-28.37 63.322-63.322 63.322h-126.643c-34.955 0-63.322-28.37-63.322-63.322s28.37-63.322 63.322-63.322h126.643c34.955 0 63.322 28.37 63.322 63.322v0zM780.616 691.075l89.538 89.538c24.696 24.696 24.696 64.842 0 89.538s-64.842 24.696-89.538 0l-89.538-89.538c-24.696-24.696-24.696-64.842 0-89.538 24.822-24.696 64.842-24.696 89.538 0v0zM780.616 691.075z" fill="#555555"></path>
-                                </svg>
-                                <span>正在加载...</span> 
+                                <Icon type="loading" size={`xs`} />
+                                <span style={{marginLeft: '.3rem'}}>正在加载...</span> 
                             </div>}
                         </div>
                     </div>

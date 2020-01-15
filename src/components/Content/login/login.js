@@ -21,7 +21,7 @@ class Login extends Component{
 	}
 
 	handleLogin() {
-		console.log('没有该学生账号信息')
+		// console.log('没有该学生账号信息')
 		axios.post('/api/user/login', {
             sno: this.state.sno,
             password: this.state.password 
@@ -67,9 +67,9 @@ class Login extends Component{
 					<div className="logo_box">
 						<embed src={require("../../../assets/images/logo.svg")} type="image/svg+xml"/>
 					</div>
-					<input type="text" maxLength='13' placeholder='请输入学号' onChange={this.handleChangeSno.bind(this)}/>
+					<input type="text" maxLength='13' placeholder='请输入学号' onChange={this.handleChangeSno.bind(this)} autocomplete="off"/>
 					<div className="underline"></div>
-					<input type="password" maxLength='13' placeholder='请输入密码' onChange={this.handleChangePsw.bind(this)}/>
+					<input type="password" maxLength='13' placeholder='请输入密码' onChange={this.handleChangePsw.bind(this)} autocomplete="off"/>
 					<div className="underline"></div>
 					<button className='login_now' onClick={this.handleLogin.bind(this)}>
 						登录

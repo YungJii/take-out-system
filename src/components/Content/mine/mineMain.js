@@ -52,7 +52,9 @@ class mineMain extends Component {
                     window.location.href=`/login`;
 				});
             } else {
-				Toast.fail(res.data.message, 2);
+				Toast.fail(res.data.message, 2, () => {
+                    window.location.href=`/login`;
+                });
 			}
         })
     }

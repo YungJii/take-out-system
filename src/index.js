@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { HashRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+const axios = require('axios')
 
 ReactDOM.render(
     <Router>
@@ -21,8 +22,20 @@ React.$utils = {
       newObj[item] = template;
     }
     return newObj;
+  },
+  monitor: () => {
+    if (window.localStorage.getItem('order_message') !== null) {
+      axios.post('/api/order/getOrderInfoByNum', {
+        num: window.localStorage.getItem('order_message')
+      })
+      .then((res) => {
+        console.log(res.data.message)
+      })
+    }
   }
 }
+
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

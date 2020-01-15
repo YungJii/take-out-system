@@ -1,0 +1,175 @@
+.bcli {
+    background: linear-gradient(#3aa8ff 6%, #fafafa 36%);
+    .order_box {
+        padding: 2rem;
+        .box_perinfo {
+            position: relative;
+            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+            background-color: white;
+            border-radius: .3rem;
+            .perinfo_address {
+                margin: 0 1rem;
+                color: black;
+                font-size: 1.3rem;
+                font-weight: bold;
+                line-height: 2rem;
+                padding: 2rem;
+                border-bottom: 1px solid #eeecec;
+            }
+            .perinfo_name_phone {
+                padding: 2rem;
+                margin: 0 1rem;
+                border-bottom: 1px solid #eeecec;
+                color: #a3a3a3;
+                span+span {
+                    float: right;
+                }
+            }
+            .perinfo_balance {
+                margin: 0 1rem;
+                padding: 2rem;
+                span {
+                    &:first-child {
+                        font-weight: bold;
+                    }
+                }
+                span+span {
+                    float: right;
+                }
+            }
+            
+        }
+        .box_orderinfo {
+            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+            background-color: white;
+            position: relative;
+            border-radius: .3rem;
+            .orderinfo_name {
+                margin: 0 1rem;
+                color: black;
+                font-size: 1.3rem;
+                font-weight: bold;
+                line-height: 2rem;
+                padding: 1.7rem 2rem;
+                border-bottom: 1px solid #eeecec;
+            }
+            .orderinfo_content {
+                .content_food {
+                    width: 90%;
+                    margin: auto;
+                    padding-bottom: 1rem;
+                    span {
+                        display: inline-block;
+                        &:first-child {
+                            padding-top: 1rem;
+                            width: 70%;
+                        }
+                        &:last-child {
+                            font-weight: bold;
+                            float: right;
+                            line-height: 3rem;
+                        }
+                    }
+                    &:last-child {
+                        border-bottom: 1px solid #eeecec;
+                    }
+                }
+                .content_fee {
+                    width: 90%;
+                    margin: auto 1rem;
+                    border-top: 1px solid #eeecec;
+                    padding: 1rem 0;
+                    span+span {
+                        float: right;
+                        font-weight: bold;
+                    }
+                }
+                .content_money {
+                    width: 90%;
+                    margin: auto 1rem;
+                    border-top: 1px solid #eeecec;
+                    padding: 1rem 0;
+                    span {
+                        font-weight: bold;
+                    }
+                    span+span {
+                        float: right;
+                    }
+                }
+            }
+        }
+        .box_remark {
+            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+            background-color: white;
+            position: relative;
+            border-radius: .3rem;
+            .remark_input {
+                padding: 1rem 2rem;
+                margin: 0 1rem;
+                input {
+                    font-size: 1rem;
+                }
+            }
+
+        }
+        .box_footer{
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: rgba(61,61,63,.9);
+            height: 3.5rem;
+            z-index: 110;
+            span {
+                &:first-child {
+                    color: white;
+                    font-size: 1.3rem;
+                    font-weight: bold;
+                    margin-left: 1rem;
+                }
+            }
+            .submit_button{
+                height: 100%;
+                width: 7.5rem;
+                background-color: #4cd964;
+                color: #fff;
+                text-align: center;
+                text-decoration: none;
+                font-size: 1rem;
+                font-weight: 700;
+                line-height: 3.4rem;
+            }
+        }
+        
+    }
+    .card_sign {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 50;
+        width: 10rem;
+        height: 10rem;
+        background-image: linear-gradient(135deg, transparent 10%, #40bef9 25%, transparent 0);
+        font-size: 1rem;
+        span {
+            position: absolute;
+            top: 1.6rem;
+            left: -.1rem;
+            display: block;
+            color: #fff;
+            font-weight: 700;
+            transform: rotate(-45deg) scale(0.8);
+        }
+    }
+}
+
+input:-internal-autofill-selected {
+    background-color: transparent !important;
+    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import '../../../scss/commoditySmart.scss';
 const axios = require('axios');
 
@@ -20,6 +21,8 @@ class CommoditySmart extends Component {
     }
 
     componentWillMount() {
+        // 清空订单内容
+        localStorage.removeItem('order_details');
         axios.get('/api/store/getTypeAndFood', {
             params: {
                 storeId: this.props.storeId
@@ -38,21 +41,34 @@ class CommoditySmart extends Component {
                 menu_storage[data[i].id] = 0
                 commodities_original = commodities_original.concat(data[i].food_info)
             }
+
+            console.log(commodities_original)
             // 处理数组
             for (let i = 0; i < commodities_original.length; i++) {
                 let single_commdity = {}
-                single_commdity.name = commodities_original[i].name
+                single_commdity.foodName = commodities_original[i].name
                 single_commdity.money = commodities_original[i].money
-                single_commdity.id = commodities_original[i].id
+                single_commdity.foodId = commodities_original[i].id
                 single_commdity.typeId = commodities_original[i].typeId
-                single_commdity.purchased = 0
+                single_commdity.foodNum = 0
                 food_stroage[commodities_original[i].id] = single_commdity
             }
             // let asd = React.$utils.deepClone()
+            for (let i = 0; i < data.length; i++) {
+                for (let j = 0; j < data[i].food_info.length; j++) {
+                    data[i].food_info[j].foodId = data[i].food_info[j].id
+                    delete data[i].food_info[j].id
+                }
+                // data[i].foodId = data[i].id
+            }
+            console.log(data)
+            console.log(food_stroage)
             this.setState({
                 message: data,
                 food_stroage: food_stroage,
                 menu_storage: menu_storage
+            }, () => {
+                console.log(this.state)
             })
         })
     }
@@ -112,14 +128,14 @@ class CommoditySmart extends Component {
             },620)
 
             // 商品 +1
-            food_stroage[vc.id].purchased += 1
+            food_stroage[vc.foodId].foodNum += 1
             will_change_menu[vc.typeId] = this.state.menu_storage[vc.typeId] + 1
             total_price = Number((this.state.total_price + (parseFloat(vc.money))).toFixed(2))
-        } else if (this.state.food_stroage[vc.id] === 0 && opera < 0) {
+        } else if (this.state.food_stroage[vc.foodId] === 0 && opera < 0) {
             // 如果数量等于0的时候则不执行
             return
         } else {
-            food_stroage[vc.id].purchased -= 1
+            food_stroage[vc.foodId].foodNum -= 1
             will_change_menu[vc.typeId] = this.state.menu_storage[vc.typeId] - 1
             total_price = Number((this.state.total_price - (parseFloat(vc.money))).toFixed(2))
         }
@@ -160,7 +176,7 @@ class CommoditySmart extends Component {
             let food_stroage = this.state.food_stroage
             let menu_storage = this.state.menu_storage
             for (let i in food_stroage) {
-                food_stroage[i].purchased = 0
+                food_stroage[i].foodNum = 0
             }
             for (let i in menu_storage) {
                 menu_storage[i] = 0
@@ -180,13 +196,29 @@ class CommoditySmart extends Component {
 	}
 
     // 去结算
-    settleHandle() {
-        if (this.state.total_price <= parseFloat(this.props.arriveMoney)) {
-            return
+    handleSetLocal() {
+        let query_object = {}
+        let food = []
+        let total_money = 0
+        for (let i in this.state.food_stroage) {
+            if (this.state.food_stroage[i].foodNum > 0) {
+                let storage = JSON.parse(JSON.stringify(this.state.food_stroage[i]))
+                storage.allMoney = parseFloat(this.state.food_stroage[i].money) * this.state.food_stroage[i].foodNum
+                total_money += storage.allMoney
+                delete storage.typeId
+                delete storage.money
+                food.push(storage)
+            }
         }
-        console.log('settleHandle')
+        query_object.detail = {}
+        query_object.detail.food = food
+        query_object.detail.fee = parseFloat(this.props.fee)
+        query_object.remark = ''
+        query_object.storeId = this.props.storeId
+        query_object.money = total_money.toFixed(2)
+        localStorage.setItem('order_details',JSON.stringify(query_object))
     }
-
+    
     render() { 
         let message = this.state.message.length > 0 ? this.state.message : []
         let food_stroage = this.state.food_stroage
@@ -205,6 +237,7 @@ class CommoditySmart extends Component {
 
         // 右侧内容
         let listDomMain = message.map((v, index) => {
+            console.log(v)
             let listDomDes = v.food_info.map((vc, indec) => {
                 return (
                     <dd className='commodity_main_list' key={indec}>
@@ -227,10 +260,10 @@ class CommoditySmart extends Component {
                                 </strong>
                                 <div className='food_add'>
                                     <span className='food_add_box'>
-                                        {this.state.food_stroage[vc.id].purchased !== 0? <span className='food_add_add' onClick={this.handleSubmit.bind(this, vc , -1)}>
+                                        {this.state.food_stroage[vc.foodId].foodNum !== 0? <span className='food_add_add' onClick={this.handleSubmit.bind(this, vc , -1)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" version="1.1"><path fillRule="evenodd" d="M22 0C9.8 0 0 9.8 0 22s9.8 22 22 22 22-9.8 22-22S34.2 0 22 0zm0 42C11 42 2 33 2 22S11 2 22 2s20 9 20 20-9 20-20 20z" clipRule="evenodd"></path><path fillRule="evenodd" d="M32 20c1.1 0 2 .9 2 2s-.9 2-2 2H12c-1.1 0-2-.9-2-2s.9-2 2-2h20z" clipRule="evenodd"></path></svg>
                                         </span> : null }
-                                        {this.state.food_stroage[vc.id].purchased !== 0? <span role="button" className="food_add_box_s">{this.state.food_stroage[vc.id].purchased}</span> : null}
+                                        {this.state.food_stroage[vc.foodId].foodNum !== 0? <span role="button" className="food_add_box_s">{this.state.food_stroage[vc.foodId].foodNum}</span> : null}
                                         <span className='food_add_add' onClick={this.handleSubmit.bind(this, vc , 1)} ref={(add)=>{this.add = add}}>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" version="1.1"><path fill="none" d="M0 0h44v44H0z"/><path fillRule="evenodd" d="M22 0C9.8 0 0 9.8 0 22s9.8 22 22 22 22-9.8 22-22S34.2 0 22 0zm10 24h-8v8c0 1.1-.9 2-2 2s-2-.9-2-2v-8h-8c-1.1 0-2-.9-2-2s.9-2 2-2h8v-8c0-1.1.9-2 2-2s2 .9 2 2v8h8c1.1 0 2 .9 2 2s-.9 2-2 2z" clipRule="evenodd"/></svg>
                                         </span>
@@ -239,6 +272,7 @@ class CommoditySmart extends Component {
                             </section>
                         </div>
                     </dd>
+                    // <div>123123123</div>
                 )
             })
             return (
@@ -257,21 +291,21 @@ class CommoditySmart extends Component {
         let list = (() => {
             let res = []
             for (let i in food_stroage) {
-                if (food_stroage[i].purchased !== 0) {
+                if (food_stroage[i].foodNum !== 0) {
                     res.push(
                         <li className='footer_all_tip_main_list' key={i}>
                             <span className="entityList-entityname_1">
-                                <em className="entityList-entityname_1_1">{food_stroage[i].name}</em>
+                                <em className="entityList-entityname_1_1">{food_stroage[i].foodName}</em>
                             </span>
                             <span className="entityList-entityname_2">
-                                <span className="entityList-entityname_2_1">{(food_stroage[i].money*food_stroage[i].purchased).toFixed(2)}</span>
+                                <span className="entityList-entityname_2_1">{(food_stroage[i].money*food_stroage[i].foodNum).toFixed(2)}</span>
                             </span>
                             <span className="entityList-entityname_3 food_add">
                                 <span className='food_add_box'>
-                                    {food_stroage[i].purchased !== 0? <span className='food_add_add' onClick={this.handleSubmit.bind(this, food_stroage[i] , -1)}>
+                                    {food_stroage[i].foodNum !== 0? <span className='food_add_add' onClick={this.handleSubmit.bind(this, food_stroage[i] , -1)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" version="1.1"><path fillRule="evenodd" d="M22 0C9.8 0 0 9.8 0 22s9.8 22 22 22 22-9.8 22-22S34.2 0 22 0zm0 42C11 42 2 33 2 22S11 2 22 2s20 9 20 20-9 20-20 20z" clipRule="evenodd"></path><path fillRule="evenodd" d="M32 20c1.1 0 2 .9 2 2s-.9 2-2 2H12c-1.1 0-2-.9-2-2s.9-2 2-2h20z" clipRule="evenodd"></path></svg>
                                     </span> : null }
-                                    {food_stroage[i].purchased !== 0? <span role="button" className="food_add_box_s">{food_stroage[i].purchased}</span> : null}
+                                    {food_stroage[i].foodNum !== 0? <span role="button" className="food_add_box_s">{food_stroage[i].foodNum}</span> : null}
                                     <span className='food_add_add' onClick={this.handleSubmit.bind(this, food_stroage[i] , 1)} ref={(add)=>{this.add = add}}>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" version="1.1"><path fill="none" d="M0 0h44v44H0z"/><path fillRule="evenodd" d="M22 0C9.8 0 0 9.8 0 22s9.8 22 22 22 22-9.8 22-22S34.2 0 22 0zm10 24h-8v8c0 1.1-.9 2-2 2s-2-.9-2-2v-8h-8c-1.1 0-2-.9-2-2s.9-2 2-2h8v-8c0-1.1.9-2 2-2s2 .9 2 2v8h8c1.1 0 2 .9 2 2s-.9 2-2 2z" clipRule="evenodd"/></svg>
                                     </span>
@@ -329,8 +363,8 @@ class CommoditySmart extends Component {
                                 <span>¥{this.state.total_price}</span>
                             </p>
                         </div>
-                        <span className={`shoping_submit ${this.state.total_price >= parseFloat(this.props.arriveMoney) ?  '' : 'isdisable'}`} onClick={this.settleHandle.bind(this)}>
-                            {this.state.total_price >= parseFloat(this.props.arriveMoney) ? <span>去结算</span> : <span>还差¥{Number((parseFloat(this.props.arriveMoney) - this.state.total_price).toFixed(2))}起送</span>}
+                        <span className={`shoping_submit ${this.state.total_price >= parseFloat(this.props.arriveMoney) ?  '' : 'isdisable'}`}>
+                            {this.state.total_price >= parseFloat(this.props.arriveMoney) ? <span className='submit_button' onClick={this.handleSetLocal.bind(this)}><Link to={`/shopOrder`}>去结算</Link></span> : <span className='submit_button'>还差¥{Number((parseFloat(this.props.arriveMoney) - this.state.total_price).toFixed(2))}起送</span>}
                         </span>
                     </div>
                 </footer>

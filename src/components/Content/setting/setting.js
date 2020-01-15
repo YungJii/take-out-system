@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { Toast } from 'antd-mobile';
 import './setting.scss';
 import imgUpload from '../../../assets/script/img_opera.js'
-// const axios = require('axios');
+const axios = require('axios');
 
 class Setting extends Component {
     constructor(props) {
         super(props);
         this.state = {
             message: {},
-            message_storage: {},
             phone: '',
             address: '',
             lng: '',
@@ -19,21 +18,11 @@ class Setting extends Component {
     }
     
     componentWillMount() {
-        // axios.post('/api/user/makeUserInfo', {
-        //     lng: 113.578761,
-        //     lat: 23.06468
-        // })
-        // .then((res) => {
-        //     console.log(res)
-        // })
-
-
         if (localStorage.getItem('user_info') === null) {
             window.location.href=`/login`;
         } else {
             this.setState({
                 message: JSON.parse(localStorage.getItem('user_info')),
-                message_storage: JSON.parse(localStorage.getItem('user_info')),
                 pic: JSON.parse(localStorage.getItem('user_info')).pic
             }, () => {
                 console.log(this.state.message)
@@ -41,8 +30,44 @@ class Setting extends Component {
         }   
     }
 
-    handleSetPhone() {
-        imgUpload()
+    // 拿到个人信息
+    handleGetInfo() {
+        axios.get('/api/user/getUserInfo', {})
+        .then((res) => {
+            console.log(res.data.message)
+            if (res.data.status === 200) {
+                this.setState({
+                    message: res.data.message
+                })
+                localStorage.setItem('user_info', JSON.stringify(res.data.message))
+            } 
+        })
+    }
+
+    // 设置图片
+    handleSetPic() {
+        let _this = this
+        let getCompressiveFileList = (fileList) => {
+            fileList.forEach(function(blob) {
+                var reader = new FileReader();
+                reader.onload = function() {
+                    document.getElementById('img').src = this.result
+                    _this.setState({
+                        pic: this.result
+                    })
+                }
+                reader.readAsDataURL(blob);
+            })
+        }
+        
+        imgUpload().then((v) => {
+            v.click()
+            v.onchange = function () {
+                var fileList = this.files;
+                var process = window.lzImgProcess();
+                process(fileList, getCompressiveFileList);
+            }
+        })
     }
 
     componentDidMount() {
@@ -141,6 +166,7 @@ class Setting extends Component {
                 geocoder.getAddress([lng, lat], (status, result) => {
                     // console.log(result.regeocode.formattedAddress)
                     let address = result.regeocode.formattedAddress.replace('广东省东莞市麻涌镇', '');
+                    address = address.replace('中山大学新华学院东莞校区', '');
                     this.setState({
                         lng: lng,
                         lat: lat,
@@ -180,15 +206,38 @@ class Setting extends Component {
         console.log('handleChangeAddress')
     }
 
-    //      /api/user/makeUserInfo
+    // 保存设置
     handleSaveSetting() {
-        console.log('handleSaveSetting')
+        axios.post('/api/user/makeUserInfo', {
+            phone: this.state.phone || this.state.message.phone,
+            address: this.state.address || this.state.message.address,
+            lng: this.state.lng || this.state.message.lng,
+            lat: this.state.lat || this.state.message.lat,
+            pic: this.state.pic || this.state.message.pic
+        })
+        .then((res) => {
+            console.log(res)
+            if (res.data.status === 200) {
+                Toast.success(res.data.message, 1, () => {
+                    this.handleGetInfo()
+                });
+            } else {
+                Toast.fail(res.data.message, 1, () => {
+                    window.location.href=`/login`;
+                });
+            }
+        })
     }
 
     render() { 
         return ( 
             <div className="setting_box">
                 <div className="setting_title">
+                    <nav>
+                        <a href="/mine" className='back'>
+                            <svg t="1578651010018" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2250" width="200" height="200"><path d="M366.32213 511.145539l377.388162-377.387139c15.865339-15.852036 15.865339-41.571814 0-57.422828-15.864316-15.864316-41.557488-15.864316-57.421804 0l-406.100088 406.099065c-15.864316 15.852036-15.864316 41.570791 0 57.421804l406.100088 406.100088c7.93267 7.93267 18.315134 11.899004 28.711926 11.899005 10.381441 0 20.778232-3.966335 28.710902-11.899005 15.865339-15.851013 15.865339-41.571814 0-57.422827L366.32213 511.145539z" p-id="2251" fill="#2c2c2c"></path></svg>
+                        </a>
+                    </nav>
                     <h2>
                         修改个人信息
                     </h2>
@@ -196,7 +245,7 @@ class Setting extends Component {
                 <div className="setting_content">
                     <div className="avatar">
                         <input type="file" id="choose" accept="image/*" multiple="multiple" style={{display: 'none'}}/>
-                        <img src={this.state.message.pic} alt="" onClick={this.handleSetPhone.bind(this)}></img>
+                        <img src={this.state.message.pic} alt="" onClick={this.handleSetPic.bind(this)} id="img"></img>
                     </div>
                     <div className="content_line">
                         <span className="title">姓名</span>

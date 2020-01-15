@@ -1,4 +1,6 @@
 .search_result_box {
+    height: 100vh;
+    background-color: #fff;
     .search_bar {
         background-color: rgb(30, 130, 210);
         display: flex;
@@ -35,7 +37,7 @@
         align-items: center;
         -webkit-justify-content: center;
         justify-content: center;
-        background-color: #fff;
+        // background-color: #fff;
         .no_result_p1 {
             margin-bottom: .2rem;
         }

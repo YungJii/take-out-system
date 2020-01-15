@@ -13,9 +13,19 @@
         img {
             border-radius: .5rem
         }
-    }
-    .headerMain-address {
-        margin: 0 .4rem;
+        .title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .headerMain-address {
+                margin: 0 .4rem;
+                width: 10rem;
+                display: inline-block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
     }
 }
 .activityMain {

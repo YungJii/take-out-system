@@ -1,4 +1,4 @@
-*{margin: 0;padding:0;}
+*{margin: 0;padding:0; touch-action: pan-y; }
 #root {
 	// background: white;
 	background: #f8f8f8;
@@ -33,21 +33,25 @@
 					background-image: linear-gradient(0deg,hsla(0,0%,100%,0),rgba(0,0,0,.5));
 			};
 		}
-		nav{
-			position: relative;
-			padding: 1rem;
-			.back{
-				display: inline-block;
-				svg{
-					width: 1.5rem;
-					height: 1.5rem;
-				}
+		
+	}
+	nav{
+		position: absolute;
+		top: 1rem;
+		padding: 1rem;
+		z-index: 999;
+		.back{
+			display: inline-block;
+			svg{
+				width: 1.5rem;
+				height: 1.5rem;
 			}
 		}
 	}
 	.shoplist_header_main{
 		// padding: .8rem 0 0;
 		// padding: 8vw 0 0;
+		background-color: #fff;
 		margin-top: 2rem;
 		position: relative;
 		display: -webkit-flex;
