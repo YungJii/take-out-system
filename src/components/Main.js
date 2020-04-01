@@ -7,8 +7,13 @@ import {BrowserRouter,Route,Switch} from 'react-router-dom';
 import ShopDetails from './Content/shop/shop.js'
 import Login from './Content/login/login.js'
 import Setting from './Content/setting/setting.js'
+import LuckDraw from './Content/luckDraw/luckDraw.js'
+import LuckDrawRecord from './Content/luckDraw/luckDrawRecord.js'
+import Coupon from './Content/luckDraw/coupon.js'
 import SearchResult from './Content/searchResult/searchResult.js'
 import ShopOrder from './Content/shop/shopOrder/shopOrder.js'
+import Activity from './Content/activity/activity.js'
+import ActivityDetails from './Content/activity/activityDetails.js'
 import InfoTips from './common/infoTips.js'
 import '../scss/NavTabBar.scss';
 
@@ -29,6 +34,9 @@ class NavTabBar extends Component {
       const Search=({ match })=>{
         return <SearchResult name={match.params.name}/>
       }
+      const AcDetails =({ match })=>{
+        return <ActivityDetails name={match.params.id}/>
+      }
       return (
         <BrowserRouter>
           <div>
@@ -38,10 +46,15 @@ class NavTabBar extends Component {
             <Route  path='/mine' component={Mine}/>
             <Switch>
               <Route  path='/shop/:id' component={Shop}/>
+              <Route  path='/activity' component={Activity}/>
+              <Route  path='/activities/:id' component={AcDetails}/>
               <Route  path="/shopOrder" component={ShopOrder} />
               <Route  path='/search/:name' component={Search}/>
               <Route  path='/login' component={Login}/>
               <Route  path='/setting_info' component={Setting}/>
+              <Route  path='/showing_luckDraw' component={LuckDraw}/>
+              <Route  path='/showing_luckDrawRecord' component={LuckDrawRecord}/>
+              <Route  path='/showing_coupon' component={Coupon}/>
               <Footer/>
             </Switch>
           </div>

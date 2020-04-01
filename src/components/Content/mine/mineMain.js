@@ -260,7 +260,21 @@ class mineMain extends Component {
         console.log('handleSetSafe')
         window.location.href=`/setting_safe`;
     }
-
+    // 进入抽奖活动界面
+    handleLuckDraw() {
+        console.log('handleLuckDraw')
+        window.location.href=`/showing_luckDraw`;
+    }
+    // 进入个人抽奖记录
+    handleLuckDrawRecord() {
+        console.log('handleLuckDrawRecord')
+        window.location.href=`/showing_luckDrawRecord`;
+    }
+    // 进入我的优惠券
+    handCoupon() {
+        console.log('handCoupon')
+        window.location.href=`/showing_coupon`;
+    }
     render() { 
         return ( 
             <div className="mine_box">
@@ -268,6 +282,7 @@ class mineMain extends Component {
                     <h2>
                         个人信息
                         <span className="content_setting" onClick={this.handleSetting.bind(this)}></span>
+                        {/* <span className="content_luckDraw" onClick={this.handleLuckDraw.bind(this)}></span> */}
                         {/* <span className="content_safe" onClick={this.handleSetSafe.bind(this)}></span> */}
                     </h2>
                 </div>
@@ -289,7 +304,19 @@ class mineMain extends Component {
                         <img src={this.state.message.pic} alt=""></img>
                         <h3>{this.state.message.name}</h3>
                     </div>
-                    <div id="map" className="map"></div>
+                    {/* <div id="map" className="map"></div> */}
+                </div>
+                <div className="personal_luckDraw">
+                    <p className="p1">
+                        <span onClick={this.handleLuckDraw.bind(this)}><img src={require("../../../assets/images/luckDraw.png")} alt=""></img></span>
+                        <span onClick={this.handCoupon.bind(this)}><img src={require("../../../assets/images/Coupon.png")} alt=""></img></span>
+                        <span onClick={this.handleLuckDrawRecord.bind(this)}><img src={require("../../../assets/images/luckDraw_record.png")} alt=""></img></span>
+                    </p>
+                    <p className="luckDraw_font p2">
+                        <span>参与抽奖</span>
+                        <span>我的优惠券</span>
+                        <span>中奖记录</span>
+                    </p>
                 </div>
                 <div className="personal_paynecessity">
                     <p>

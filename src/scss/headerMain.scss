@@ -11,7 +11,8 @@
             font-weight: 600;
         }
         img {
-            border-radius: .5rem
+            border-radius: .5rem;
+            height: 14rem;
         }
         .title {
             display: flex;
@@ -106,4 +107,32 @@
     background-color: white;
     width: 100%;
     margin-top: 1rem;
+}
+
+.discount {
+    background: white;
+    padding-bottom: 1rem;
+    .discount_content {
+        height: 7vh;
+        text-align: center;
+        line-height: 7vh;
+        border-radius: 10px;
+        margin: 0 1rem;
+        display: flex;
+        justify-content: space-around;
+        .content_details {
+            display: flex;
+            width: 50vw;
+            justify-content: space-around;
+        }
+    }
+    .canUse {
+        background: linear-gradient(235deg, #F6E5BD, #FAF0DB);
+    }
+    .used {
+        background: linear-gradient(235deg, rgb(189, 239, 246), rgb(219, 229, 250));
+    }
+    .cantUse {
+        background: linear-gradient(235deg, rgb(243, 64, 64), rgb(235, 166, 166));
+    }
 }

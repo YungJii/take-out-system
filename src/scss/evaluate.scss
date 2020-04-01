@@ -18,7 +18,7 @@
         transform: translateZ(1px);
         .box_dialog {
             width: 80vw;
-            height: 50vh;
+            // height: 50vh;
             border-radius: .5rem;
             background-color: white;
             // z-index: 1001;
@@ -50,7 +50,7 @@
             }
             .dialog_textarea {
                 width: 90%;
-                margin: 2rem auto;
+                margin: 1rem auto;
                 .am-list-item {
                     background-color: rgb(250, 250, 250);
                     border-radius: .5rem;
@@ -58,7 +58,7 @@
             }
             .dialog_submit {
                 width: 80%;
-                margin: auto;
+                margin: 1rem auto;
                 .am-button-primary {
                     background-color: rgb(103, 194, 58);
                 }

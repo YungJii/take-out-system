@@ -1,0 +1,61 @@
+.activity {
+    background-image: url('../../../assets/images/images.jpg');
+    .activity-title {
+        // background-color: rgb(255, 255, 255);
+        h2 {
+            margin: 0;
+            padding: 1rem;
+            font-weight: bold;
+            text-align: center;
+            // background: rgb(30, 130, 210);
+            color: white;
+        }
+    }
+    
+    .activity-item {
+        background-color: #ffffff;
+        display: flex;
+        margin-top: 1rem;
+        box-shadow: 0px 0px 1px 0 rgba(0, 0, 0, 0.1);
+        .activity-img {
+            display: flex;
+            align-items: center;
+            img {
+                width: 8rem;
+                margin: 1rem;
+                height: 8rem;
+            }
+        }
+        .activity-details {
+            margin: 1rem 2rem;
+            font-size: 1rem;
+            p {
+                margin-top: 1rem;
+                margin-bottom: 0rem;
+                &:first-child {
+                    margin-top: 0rem;
+                }
+            }
+            .details-title {
+                font-weight: bold;
+            }
+            .details-shop {
+                display: inline-block;
+                padding: .5rem;
+                background-color: #efefef;
+            }
+        }
+    }
+    nav {
+        position: absolute;
+        top: .5rem;
+        padding: 1rem;
+        z-index: 999;
+        display: inline-block;
+            svg{
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+    }
+}
+

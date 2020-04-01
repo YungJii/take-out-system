@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Icon } from 'antd';
-import { Toast } from 'antd-mobile';
+// import 'antd/dist/antd.css';
+// import { Toast } from 'antd-mobile';
 import Search from '../../common/Search.js';
 import Slick from './Slick.js';
 import '../../../scss/headerMain.scss';
@@ -15,7 +16,9 @@ class TakeOutMain extends Component {
             page: 1,
             noMore: false,
             opa: true,
-            message: {}
+            message: {},
+            // 折扣信息
+            discount_content: {}
         }
     }
     componentWillMount() {
@@ -30,6 +33,31 @@ class TakeOutMain extends Component {
             })
         }
         this.getBusinessList()
+        this.handleGetDiscount()
+    }
+
+    // 获取折扣信息
+    handleGetDiscount() {
+        axios.get(`/api/discount/getDiscount?userId=${JSON.parse(window.localStorage.getItem('user_info')).id}`,{})
+        .then((res) => {
+            if (res.data.status === 200) {
+                this.setState({
+                    discount_content: res.data.message
+                }, () => {
+                    if (res.data.message.time) {
+                        this.handleOverTime(res.data.message.time)
+                    }
+                })
+            }
+        })
+    }
+
+    // 多少秒后重新请求
+    handleOverTime = (time) => {
+        let i = setTimeout(() => {
+            this.handleGetDiscount();
+            clearInterval(i)
+        }, time * 1000);
     }
 
     // 获取个人信息
@@ -55,7 +83,8 @@ class TakeOutMain extends Component {
     componentWillUnmount(){
 		this.isUnmount = true;
 		document.removeEventListener('scroll',this._more.bind(this))
-	}
+    }
+    
 
     // 请求推荐商家列表
     getBusinessList() {
@@ -113,11 +142,28 @@ class TakeOutMain extends Component {
     }
 
     handleActive() {
-        console.log('handleActive')
-        Toast.success('敬请期待', 1);
+        // console.log('handleActive')
+        // Toast.success('敬请期待', 1);
+		/*用户的地址hash和商家id*/
+		window.location.href=`/activity`;
     }
     
     render() { 
+        let Discount_content = this.state.discount_content.exist === 1 ? 
+                <div className="discount">
+                    <div className={this.state.discount_content.canUse === 1 && this.state.discount_content.used === 1 ? 'canUse discount_content' : this.state.discount_content.used === 0 && this.state.discount_content.canUse === 1 ? 'used discount_content' : 'cantUse discount_content'}>
+                        <span style={{fontWeight: 'bold', fontSize: '1.2rem'}}>今日折扣 | </span>
+                        <div className="content_details">
+                            <span style={{fontWeight: 'bold'}}>学号尾数:</span>
+                            <span>{this.state.discount_content.num}</span>
+                            <span style={{fontWeight: 'bold'}}>享受折扣:</span>
+                            <span>{this.state.discount_content.discount}%</span>
+                        </div>
+                        <span>{this.state.discount_content.canUse === 1 && this.state.discount_content.used === 1 ? '可使用' : this.state.discount_content.used === 0 && this.state.discount_content.canUse === 1 ? '已使用' : '不可使用'}</span>
+                    </div>
+                </div>
+                : null
+
         return ( 
             <div>
                 <div className="headerMain">
@@ -136,6 +182,7 @@ class TakeOutMain extends Component {
                         <img src={require("../../../assets/images/Advertisement/business_activity.jpg")} alt="" onClick={this.handleActive.bind(this)}></img>
                     </div>
                 </div>
+                {Discount_content}
                 {/* 推荐商家 */}
                 <div className="bcw100">
                     <div className="recommend">

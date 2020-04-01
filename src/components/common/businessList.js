@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../scss/businessList.scss';
+import { Toast } from 'antd-mobile';
 
 class BusinessList extends Component {
     constructor(props) {
@@ -17,6 +18,10 @@ class BusinessList extends Component {
 
     // 跳转
     handleClick(){
+        if(this.state.business_details.isOpen === 0) {
+            Toast.fail('该店铺已打样', 1);
+            return
+        }
 		/*用户的地址hash和商家id*/
 		window.location.href=`/shop/${this.state.business_details.id}`;
     }

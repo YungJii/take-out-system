@@ -21,6 +21,18 @@
                 height: 1.5rem;
             }
         }
+        .content_luckDraw {
+            &:after {
+                content: '';
+                background-image: url('../assets/images/luckDraw.png');
+                position: absolute;
+                z-index: 100;
+                right: 3.5rem;
+                background-size: 1.4rem 1.4rem;
+                width: 1.4rem;
+                height: 1.4rem;
+            }
+        }
     }
     .personal_information {
         background-color: white;
@@ -115,6 +127,31 @@
                 display: inline-block;
                 width: 20%;
             }
+        }
+    }
+    .personal_luckDraw {
+        background-color: white;
+        margin: .8rem .5rem;
+        border-radius: .5rem;
+        box-shadow: 0px 0px 1px 0 rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        .p1 {
+            display: flex;
+            margin-bottom: .5rem;
+            padding: 0 4rem;
+            justify-content: space-between;
+            img {
+                width: 2rem;
+                height: 2rem;
+            }
+        }
+        .p2 {
+            display: flex;
+            padding: 0 3rem;
+            justify-content: space-between;
+        }
+        .luckDraw_font {
+            color: #999999;
         }
     }
     .login_out {
