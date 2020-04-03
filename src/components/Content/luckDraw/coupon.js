@@ -46,7 +46,7 @@ class Coupon extends Component{
 
     // /api/coupon/participate
     getParticipate() {
-        axios.get(`/api/coupon/winRecord?page=${this.state.page}`, {})
+        axios.get(`/api/coupon/myCoupon?page=${this.state.page}`, {})
         .then((res) => {
             if (res.data.status === 200) {
                 if (res.data.message.data.length !== 10) {

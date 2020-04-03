@@ -23,7 +23,7 @@ class shopOrder extends Component {
             // 预约时间
             preOrderValue: 0,
             // 折扣id
-            coupouId: null,
+            couponId: null,
         }
 
         this.handleCoupon = this.handleCoupon.bind(this)
@@ -82,13 +82,13 @@ class shopOrder extends Component {
             money: totoal_money,
             preOrder: this.state.preOrderValue
         }
-        if (this.state.coupouId !== null) {
-            reqObj = Object.assign(reqObj, {coupouId: this.state.coupouId});
+        if (this.state.couponId !== null) {
+            reqObj = Object.assign(reqObj, {couponId: this.state.couponId});
         }
         if (this.state.discount_message.exist === 1 && this.state.discount_message.canUse === 1 && this.state.discount_message.used === 1) {
             reqObj = Object.assign(reqObj, {discount: (this.state.discount_message.discount + '%')});
         }
-        // coupouId: this.state.coupouId,
+        // couponId: this.state.couponId,
         // discount: 
         console.log(reqObj)
         axios.post('/api/order/preOrder', reqObj)
@@ -200,14 +200,14 @@ class shopOrder extends Component {
 
     // 使用优惠券
     handleUseCoupon(value) {
-        console.log(value.arriveMoney)
+        console.log(value)
         if (!value.canUse) {
             Toast.fail('不满足使用条件', 2)
             return
         }
         this.setState({
             Discount: value.amount,
-            coupouId: value.id
+            couponId: value.id
         })
         this.handleCoupon()
     }
