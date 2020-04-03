@@ -1,0 +1,86 @@
+.hall {
+    height: 50vh;
+    .release_box {
+        top: 20vh;
+        left: 10vw;
+        height: 23rem;
+    }
+    .hall-title {
+        // background-color: rgb(255, 255, 255);
+        h2 {
+            margin: 0;
+            padding: 1rem;
+            font-weight: bold;
+            text-align: center;
+            background: rgb(30, 130, 210);
+            color: white;
+        }
+        nav {
+            position: absolute;
+            top: .5rem;
+            padding: 1rem;
+            z-index: 999;
+            display: inline-block;
+                svg{
+                    width: 1.5rem;
+                    height: 1.5rem;
+                }
+        }
+    }
+    .hall-item {
+        background-color: #ffffff;
+        display: flex;
+        margin: 1rem;
+        border-radius: 1rem;
+        box-shadow: 0px 0px 1px 0 rgba(0, 0, 0, 0.1);
+        .hall-img {
+            display: flex;
+            // align-items: center;
+            img {
+                width: 4rem;
+                margin: 1rem;
+                height: 4rem;
+            }
+        }
+        .hall-details {
+            margin: 1rem 0rem;
+            font-size: 1rem;
+            width: 100%;
+            position: relative;
+            p {
+                margin-top: 1rem;
+                margin-bottom: 0rem;
+                &:first-child {
+                    margin-top: 0rem;
+                }
+            }
+            .mt2 {
+                margin-top: 2rem;
+            }
+            .details-shop {
+                display: inline-block;
+                padding: .5rem;
+                background-color: #efefef;
+            }
+            .username {
+                font-weight: bold;
+            }
+            .details-btn {
+                position: absolute;
+                right: 1rem;
+                width: 4rem;
+            }
+        }
+    }
+    .form_box {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 2vh;
+        span {
+            line-height: 4vh;
+        }
+    }
+    .details-title {
+        font-weight: bold;
+    }
+}

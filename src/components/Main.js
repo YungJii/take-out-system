@@ -14,6 +14,7 @@ import SearchResult from './Content/searchResult/searchResult.js'
 import ShopOrder from './Content/shop/shopOrder/shopOrder.js'
 import Activity from './Content/activity/activity.js'
 import ActivityDetails from './Content/activity/activityDetails.js'
+import Hall from './Content/hall/hall.js'
 import InfoTips from './common/infoTips.js'
 import '../scss/NavTabBar.scss';
 
@@ -55,6 +56,7 @@ class NavTabBar extends Component {
               <Route  path='/showing_luckDraw' component={LuckDraw}/>
               <Route  path='/showing_luckDrawRecord' component={LuckDrawRecord}/>
               <Route  path='/showing_coupon' component={Coupon}/>
+              <Route  path='/hall' component={Hall}/>
               <Footer/>
             </Switch>
           </div>

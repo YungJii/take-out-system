@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { InputItem, Toast, Modal } from 'antd-mobile';
 import { CSSTransition } from 'react-transition-group'
+
+import { Radio } from 'antd'; 
 import './shopOrder.scss'
 const axios = require('axios');
 const prompt = Modal.prompt;
@@ -14,8 +16,14 @@ class shopOrder extends Component {
             query_business: {},
             coupon_message: [],
             isShow: false,
+            // 优惠券的钱
             Discount: 0,
-            discount_message: {}
+            // 折扣码的内容 .discount 是折扣码的折扣量
+            discount_message: {},
+            // 预约时间
+            preOrderValue: 1,
+            // 折扣id
+            coupouId: null,
         }
 
         this.handleCoupon = this.handleCoupon.bind(this)
@@ -54,13 +62,36 @@ class shopOrder extends Component {
 
     // 确认支付
     handleSubmit() {
-        console.log('handleSubmit')
-        axios.post('/api/order/preOrder', {
+        var discount = 1
+        if (this.state.discount_message.exist === 1 && this.state.discount_message.canUse === 1 && this.state.discount_message.used === 1) {
+            discount = (this.state.discount_message.discount) / 100
+        }
+        var totoal_money = ((parseFloat(this.state.query_business.fee) + parseFloat(this.state.local_order.money)) * discount - this.state.Discount).toFixed(2)
+        if (totoal_money < 0) {
+            totoal_money = 0
+        }
+        if (this.state.query_business.isOpen !== 2) {
+            this.setState({
+                preOrderValue: 0
+            })
+        }
+        let reqObj = {
             detail: JSON.stringify(this.state.local_order.detail),
             storeId: this.state.local_order.storeId,
             remark: this.state.local_order.remark,
-            money: this.state.local_order.money
-        })
+            money: totoal_money,
+            preOrder: this.state.preOrderValue
+        }
+        if (this.state.coupouId !== null) {
+            reqObj = Object.assign(reqObj, {coupouId: this.state.coupouId});
+        }
+        if (this.state.discount_message.exist === 1 && this.state.discount_message.canUse === 1 && this.state.discount_message.used === 1) {
+            reqObj = Object.assign(reqObj, {discount: (this.state.discount_message.discount + '%')});
+        }
+        // coupouId: this.state.coupouId,
+        // discount: 
+        console.log(reqObj)
+        axios.post('/api/order/preOrder', reqObj)
         .then( (res) => {
             if (res.data.status === 200) {
                 prompt('输入支付密码', '',
@@ -166,12 +197,21 @@ class shopOrder extends Component {
     }
 
     // 使用优惠券
-    handleUseCoupon(amount) {
-        console.log(amount)
+    handleUseCoupon(value) {
+        // console.log(amount)
         this.setState({
-            Discount: amount
+            Discount: value.amount,
+            coupouId: value.id
         })
         this.handleCoupon()
+    }
+
+    // 选择预约时间
+    handleChangeSelect(e) {
+        // console.log(v)
+        this.setState({
+            preOrderValue: e.target.value,
+        });
     }
 
     render() { 
@@ -186,10 +226,10 @@ class shopOrder extends Component {
         })
         let content_money = () => {
             var discount = 1
-            if (this.state.discount_message.exist === 1) {
+            if (this.state.discount_message.exist === 1 && this.state.discount_message.canUse === 1 && this.state.discount_message.used === 1) {
                 discount = (this.state.discount_message.discount) / 100
             }
-            var totoal_money = (parseFloat(this.state.query_business.fee) + parseFloat(this.state.local_order.money)) * discount - this.state.Discount
+            var totoal_money = ((parseFloat(this.state.query_business.fee) + parseFloat(this.state.local_order.money)) * discount - this.state.Discount).toFixed(2)
             if (totoal_money < 0) {
                 totoal_money = 0
             }
@@ -198,10 +238,11 @@ class shopOrder extends Component {
             )
         }
         
+        
         let luckDraw_Content = this.state.coupon_message.map((value, index) => {
             return (
                 // onClick={this.handleUseCoupon.bind(this, value.)}
-                <div key={index} className="luckDraw-item" onClick={this.handleUseCoupon.bind(this, value.amount)}>
+                <div key={index} className="luckDraw-item" onClick={this.handleUseCoupon.bind(this, value)}>
                     <div className="luckDraw-img">
                         <img src={`${window.config_url}${value.img}`} alt="" />
                     </div>
@@ -218,6 +259,7 @@ class shopOrder extends Component {
                 </div>
             )
         }) 
+
 
         return ( 
             <div className="bcli" id="bcli">
@@ -257,7 +299,7 @@ class shopOrder extends Component {
                                 <span style={{color: 'red'}}>-￥{this.state.Discount.toFixed(2)}</span>
                             </div> : null}
                             {/* && this.state.discount_message.used === 1 && this.state.discount_message.used === 1  */}
-                            {this.state.discount_message.exist === 0 ? null : this.state.discount_message.used === 1 && this.state.discount_message.used === 1 ? <div className="content_fee">
+                            {this.state.discount_message.exist === 0 ? null : this.state.discount_message.canUse === 0 ? null : this.state.discount_message.used === 1 ? <div className="content_fee">
                                 <span>折扣</span>
                                 <span style={{color: 'red'}}>{this.state.discount_message.discount}%</span>
                             </div> : null}
@@ -280,6 +322,19 @@ class shopOrder extends Component {
                             <span className="title">优惠券</span>
                         </p>
                     </div>
+                    {this.state.query_business.isOpen === 2 ? <div className="box_preOrder">
+                        <div className='preOrder_title'>
+                            预约时间
+                        </div>
+                        <div className="preOrder">
+                            {/* <span className="title">优惠券</span> */}
+                            <Radio.Group onChange={this.handleChangeSelect.bind(this)} value={this.state.preOrderValue}>
+                                <Radio value={1}>早上</Radio>
+                                <Radio value={2}>中午</Radio>
+                                <Radio value={3}>晚上</Radio>
+                            </Radio.Group>
+                        </div>
+                    </div> : null}
                     {/* 备注 */}
                     <div className="box_remark">
                         <div className="remark_input">

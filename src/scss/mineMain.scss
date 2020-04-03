@@ -21,6 +21,19 @@
                 height: 1.5rem;
             }
         }
+        .content_complaint {
+            &:after {
+                content: '';
+                background-image: url('../assets/images/complaint.png');
+                position: absolute;
+                z-index: 100;
+                left: 1rem;
+                top: 1.2rem;
+                background-size: 1.5rem 1.5rem;
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+        }
         .content_luckDraw {
             &:after {
                 content: '';
@@ -168,3 +181,90 @@
         }
     }
 }
+    
+.complaint_publish {
+    &:after {
+        content: '';
+        background-image: url('../assets/images/publish_complaint.png');
+        position: absolute;
+        z-index: 100;
+        right: 1rem;
+        top: 1.4rem;
+        background-size: 1.5rem 1.5rem;
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
+.release_box {
+    top: 20vh;
+    left: 10vw;
+    height: 23rem;
+}
+.form_box {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2vh;
+    span {
+        line-height: 4vh;
+    }
+}
+.details-title {
+    font-weight: bold;
+}
+.dialog_submit {
+    width: 80%;
+    margin: 1rem auto;
+    display: grid;
+    .am-button-primary {
+        background-color: rgb(103, 194, 58);
+    }
+    .ant-btn-primary {
+        background-color: rgb(103, 194, 58);
+    }
+}
+.hall-item {
+    background-color: #ffffff;
+    display: flex;
+    margin: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0px 0px 1px 0 rgba(0, 0, 0, 0.1);
+    .hall-img {
+        display: flex;
+        // align-items: center;
+        img {
+            width: 4rem;
+            margin: 1rem;
+            height: 4rem;
+        }
+    }
+    .hall-details {
+        margin: 1rem 0rem;
+        font-size: 1rem;
+        width: 100%;
+        position: relative;
+        p {
+            margin-top: 1rem;
+            margin-bottom: 0rem;
+            &:first-child {
+                margin-top: 0rem;
+            }
+        }
+        .mt2 {
+            margin-top: 2rem;
+        }
+        .details-shop {
+            display: inline-block;
+            padding: .5rem;
+            background-color: #efefef;
+        }
+        .username {
+            font-weight: bold;
+        }
+        .details-btn {
+            position: absolute;
+            right: 1rem;
+            width: 4rem;
+        }
+    }
+}
+
