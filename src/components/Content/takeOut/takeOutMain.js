@@ -38,18 +38,20 @@ class TakeOutMain extends Component {
 
     // 获取折扣信息
     handleGetDiscount() {
-        axios.get(`/api/discount/getDiscount?userId=${JSON.parse(window.localStorage.getItem('user_info')).id}`,{})
-        .then((res) => {
-            if (res.data.status === 200) {
-                this.setState({
-                    discount_content: res.data.message
-                }, () => {
-                    if (res.data.message.time) {
-                        this.handleOverTime(res.data.message.time)
-                    }
-                })
-            }
-        })
+        if (JSON.parse(window.localStorage.getItem('user_info'))) {
+            axios.get(`/api/discount/getDiscount?userId=${JSON.parse(window.localStorage.getItem('user_info')).id}`,{})
+            .then((res) => {
+                if (res.data.status === 200) {
+                    this.setState({
+                        discount_content: res.data.message
+                    }, () => {
+                        if (res.data.message.time) {
+                            this.handleOverTime(res.data.message.time)
+                        }
+                    })
+                }
+            })
+        }
     }
 
     // 多少秒后重新请求

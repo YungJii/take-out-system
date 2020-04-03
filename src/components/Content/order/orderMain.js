@@ -150,7 +150,7 @@ class Order extends Component {
                                         {value.store_info.name}
                                     </span>
                                     <span className="state">
-                                        {value.status === 0 ? '等待接受' : value.status === 1 ? '已接受 ' : value.status === 2 ? '已拒绝' : value.status === 3 ? '已送达' : '订单超时'}
+                                        {value.status === 0 ? '等待接受' : value.status === 1 ? '已接受 ' : value.status === 2 ? '已拒绝' : value.status === 3 ? '正在制作' : '已送达'}
                                     </span>
                                     <div style={{clear: "both"}}></div>
                                     <div className="time">{value.time}</div>
@@ -168,7 +168,7 @@ class Order extends Component {
                                 </div>
                                 {/* <Button>再来一单</Button> */}
                                 <div className="again_button">
-                                    {value.status === 3 ? <Button type="ghost" size="small" style={{display : 'inline-block', marginRight: '4px'}} onClick={this.handleEvaluate.bind(this, value.num)}>评价订单</Button> : null}
+                                    {value.status === 4 && value.isEvaluate === 0 ? <Button type="ghost" size="small" style={{display : 'inline-block', marginRight: '4px'}} onClick={this.handleEvaluate.bind(this, value.num)}>评价订单</Button> : null}
                                     <Button type="ghost" size="small" inline style={{ marginRight: '4px' }} className="am-button-borderfix" onClick={this.handleAgain.bind(this, value.store_info.id)}>再来一单</Button>
                                 </div>
                             </div>

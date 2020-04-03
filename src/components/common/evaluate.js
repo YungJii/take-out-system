@@ -88,7 +88,7 @@ class Evaluate extends Component{
 		return(
 			<div className="evaluate_box">
                 <div className="box-wrap">
-                    <div className="box_dialog">
+                    <div className="box_dialog" style={{top: '20vh', left: '10vw', height: '25rem'}}>
                         <div className="dialog_title">
                             <span>评价订单</span>
                             <span className="title_close" onClick={this.handleEvaluate.bind(this)}><Icon type='cross' /></span>
