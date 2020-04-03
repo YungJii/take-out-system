@@ -21,7 +21,7 @@ class shopOrder extends Component {
             // 折扣码的内容 .discount 是折扣码的折扣量
             discount_message: {},
             // 预约时间
-            preOrderValue: 1,
+            preOrderValue: 0,
             // 折扣id
             coupouId: null,
         }
@@ -134,6 +134,8 @@ class shopOrder extends Component {
                         },
                     ], 'secure-text', null, ['']
                 )
+            } else if (res.data.status === 200) {
+
             } else {
                 Toast.fail(res.data.message, 1);
             }
