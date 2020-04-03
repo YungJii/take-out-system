@@ -279,6 +279,17 @@ class Hall extends Component {
                     <span>{value.accept_info.phone}</span>
                 </p>
             </p> : null
+            let userinfo = value.acceptId === JSON.parse(window.localStorage.getItem('user_info')).id && value.user_info ? 
+            <p className="mt2">
+                <p className="mt2">
+                    <span className="details-title">发布人：</span>
+                    <span>{value.user_info.name}</span>
+                </p>
+                <p className="mt2">
+                    <span className="details-title">手机：</span>
+                    <span>{value.user_info.phone}</span>
+                </p>
+            </p> : null
             // 发布列表删除按钮
             let delete_button = value.acceptId === 0 ? <Button type="default" className="details-btn" onClick={this.handleDelete.bind(this, value.id, 1)}>删除</Button> : null;
             return (
@@ -305,15 +316,16 @@ class Hall extends Component {
                             <span className="details-title">发布时间：</span>
                             <span>{value.time}</span>
                         </p>
-                        <p className="mt2">
+                        {/* <p className="mt2">
                             <span className="details-title">发布人：</span>
                             <span>{value.user_info ? value.user_info.name : value.accept_info.name}</span>
                         </p>
                         <p className="mt2">
                             <span className="details-title">手机号码：</span>
                             <span>{value.user_info ? value.user_info.phone : value.accept_info.phone}</span>
-                        </p>
+                        </p> */}
                         {accept_userinfo}
+                        {userinfo}
                     </div>
                 </div>
             )
