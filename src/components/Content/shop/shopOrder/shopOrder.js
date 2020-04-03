@@ -241,7 +241,7 @@ class shopOrder extends Component {
         }
         
         
-        let luckDraw_Content = this.state.coupon_message.length === 0 ? this.state.coupon_message.map((value, index) => {
+        let luckDraw_Content = this.state.coupon_message.length === 0 ? null : this.state.coupon_message.map((value, index) => {
             return (
                 // onClick={this.handleUseCoupon.bind(this, value.)}
                 <div key={index} className="luckDraw-item" onClick={this.handleUseCoupon.bind(this, value)}>
@@ -260,7 +260,7 @@ class shopOrder extends Component {
                     </div>
                 </div>
             )
-        }) : null 
+        })
 
 
         return ( 

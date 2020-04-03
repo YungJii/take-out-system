@@ -76,7 +76,7 @@ class Activity extends Component{
     }
 
     handleBack() {
-        window.history.back();
+        window.location.href = '/';
     }
 
 	render(){
