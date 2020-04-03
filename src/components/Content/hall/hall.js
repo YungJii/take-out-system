@@ -26,7 +26,7 @@ class Hall extends Component {
             name: '',
             storeName: '',
             price: 0,
-            pretime: 1,
+            pretime: 0,
             // 列表数据
             list_message: [],
             releasePage: 1,
@@ -262,6 +262,14 @@ class Hall extends Component {
                             <span className="details-title">发布时间：</span>
                             <span>{value.time}</span>
                         </p>
+                        <p>
+                            <span className="details-title">发布人：</span>
+                            <span>{value.user_info.name}</span>
+                        </p>
+                        <p>
+                            <span className="details-title">手机号码：</span>
+                            <span>{value.user_info.phone}</span>
+                        </p>
                     </div>
                 </div>
             )
@@ -381,9 +389,9 @@ class Hall extends Component {
                                     <span> &nbsp; &nbsp; 时间 &nbsp; &nbsp; </span>
                                     <div>
                                         <Radio.Group value={this.state.pretime}  onChange={this.handleChangeSelect}>
-                                            <Radio value={1}>早上</Radio>
-                                            <Radio value={2}>中午</Radio>
-                                            <Radio value={3}>晚上</Radio>
+                                            <Radio value={0}>早上</Radio>
+                                            <Radio value={1}>中午</Radio>
+                                            <Radio value={2}>晚上</Radio>
                                         </Radio.Group>
                                     </div>
                                 </div>
