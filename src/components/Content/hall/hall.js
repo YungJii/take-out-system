@@ -305,11 +305,11 @@ class Hall extends Component {
                             <span className="details-title">发布时间：</span>
                             <span>{value.time}</span>
                         </p>
-                        <p>
+                        <p className="mt2">
                             <span className="details-title">发布人：</span>
                             <span>{value.user_info.name}</span>
                         </p>
-                        <p>
+                        <p className="mt2">
                             <span className="details-title">手机号码：</span>
                             <span>{value.user_info.phone}</span>
                         </p>
