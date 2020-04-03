@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Carousel, WingBlank } from 'antd-mobile';
+import { Carousel, WingBlank, Toast } from 'antd-mobile';
 
 class Slick extends Component {
   state = {
@@ -18,6 +18,10 @@ class Slick extends Component {
 
   handleGoHall(index) {
     if (index === 0) {
+      if (JSON.parse(window.localStorage.getItem('user_info')).status === 0) {
+        Toast.fail('你的账号违规，不可进入交餐大厅', 2)
+        return
+      }
       window.location.href = '/hall'
     }
   }
