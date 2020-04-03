@@ -200,7 +200,11 @@ class shopOrder extends Component {
 
     // 使用优惠券
     handleUseCoupon(value) {
-        // console.log(amount)
+        console.log(value.arriveMoney)
+        if (!value.canUse) {
+            Toast.fail('不满足使用条件', 2)
+            return
+        }
         this.setState({
             Discount: value.amount,
             coupouId: value.id
