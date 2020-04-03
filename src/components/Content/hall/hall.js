@@ -307,11 +307,11 @@ class Hall extends Component {
                         </p>
                         <p className="mt2">
                             <span className="details-title">发布人：</span>
-                            <span>{value.user_info.name}</span>
+                            <span>{value.user_info ? value.user_info.name : value.accept_info.name}</span>
                         </p>
                         <p className="mt2">
                             <span className="details-title">手机号码：</span>
-                            <span>{value.user_info.phone}</span>
+                            <span>{value.user_info ? value.user_info.phone : value.accept_info.phone}</span>
                         </p>
                         {accept_userinfo}
                     </div>
