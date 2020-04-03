@@ -262,14 +262,6 @@ class Hall extends Component {
                             <span className="details-title">发布时间：</span>
                             <span>{value.time}</span>
                         </p>
-                        <p>
-                            <span className="details-title">发布人：</span>
-                            <span>{value.user_info.name}</span>
-                        </p>
-                        <p>
-                            <span className="details-title">手机号码：</span>
-                            <span>{value.user_info.phone}</span>
-                        </p>
                     </div>
                 </div>
             )
@@ -312,6 +304,14 @@ class Hall extends Component {
                         <p className="mt2">
                             <span className="details-title">发布时间：</span>
                             <span>{value.time}</span>
+                        </p>
+                        <p>
+                            <span className="details-title">发布人：</span>
+                            <span>{value.user_info.name}</span>
+                        </p>
+                        <p>
+                            <span className="details-title">手机号码：</span>
+                            <span>{value.user_info.phone}</span>
                         </p>
                         {accept_userinfo}
                     </div>
