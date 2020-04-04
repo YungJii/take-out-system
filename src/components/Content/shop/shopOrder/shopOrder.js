@@ -216,7 +216,7 @@ class shopOrder extends Component {
     handleDontUse() {
         this.setState({
             Discount: 0,
-            conponId: null
+            couponId: null
         })
         this.handleCoupon()
     }
