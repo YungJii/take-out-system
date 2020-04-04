@@ -21,6 +21,11 @@ class Evaluate extends Component{
         this.props.handleEvaluate('')
     }
 
+    // 刷新列表
+    handleGetOrder() {
+        this.props.handleGetOrder(1)
+    }
+
     // 点星星
     handleStar(v) {
         console.log(v)
@@ -42,6 +47,7 @@ class Evaluate extends Component{
             if (res.data.status === 200) {
                 Toast.success(res.data.message, 1, () => {
                     this.handleEvaluate('')
+                    this.handleGetOrder()
                 });
             } else {
                 Toast.fail(res.data.message, 1, () => {

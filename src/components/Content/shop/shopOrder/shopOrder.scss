@@ -386,3 +386,12 @@ input:-internal-autofill-selected {
 .coupon_p {
     margin-top: 2rem !important;
 }
+.dont_use {
+    position: absolute;
+    top: 3vh;
+    right: 4vw;
+    img {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}

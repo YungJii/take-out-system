@@ -34,6 +34,11 @@ class BusinessList extends Component {
                 </div>
             </div> : null
 
+        let delivery_content = this.state.business_details.isOpen === 2 ? 
+            <div className="delivery_content">
+                <span>预约中</span>
+            </div> : null
+
         let introduce = this.state.business_details.introduce !== '' ?
             <div className="introduce">
                 <span className="introduce_box">“{this.state.business_details.introduce}”</span>
@@ -62,6 +67,7 @@ class BusinessList extends Component {
                         <span>{this.state.business_details.name}</span>
                     </h3>
                     {delivery_time}
+                    {delivery_content}
                     <div className="show_rateWrap">
                         <div>
                             <div className='activityPage_star'>

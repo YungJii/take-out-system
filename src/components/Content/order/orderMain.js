@@ -33,7 +33,7 @@ class Order extends Component {
     }
 
     handleGetOrder(page) {
-        // console.log(page)
+        console.log('handleGetOrder')
         if (page === undefined) {
             axios.get(`/api/order/myOrder?page=${this.state.page}`, {})
             .then((res) => {
@@ -179,7 +179,7 @@ class Order extends Component {
         })
         return ( 
             <div style={{backgroundColor: '#f8f8f8'}}>
-                {this.state.num !== '' ? <Evaluate num={this.state.num} handleEvaluate={this.handleEvaluate.bind(this)}/> : null}
+                {this.state.num !== '' ? <Evaluate num={this.state.num} handleEvaluate={this.handleEvaluate.bind(this)} handleGetOrder={this.handleGetOrder.bind(this)} /> : null}
                 <div className="orderMain-title">
                     <h2>我的订单</h2>
                 </div>
