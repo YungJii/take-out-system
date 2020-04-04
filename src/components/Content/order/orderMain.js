@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Button, Icon } from 'antd-mobile';
 import Evaluate from '../../common/evaluate.js'
 import '../../../scss/orderMain.scss';
+// import { createStore } from 'redux'
+// import message from '../../../reducers/index'
+// const store = createStore(message) 
+import store from '../../../reducers/index'  
 
 const axios = require('axios');
 
@@ -12,12 +16,16 @@ class Order extends Component {
             store_data: [],
             noMore: false,
             page: 1,
-            num: ''
+            num: '',
+            fresh_boolean: store.getState()
          }
     }
 
     componentWillMount() {
+        // console.log(store.getState())
+        // console.log(this.state.fresh_boolean)
         // console.log(React.$utils.monitor)
+        store.subscribe(this.storeChange)
 		this.isUnmount = false;
 		document.addEventListener('scroll',this._more.bind(this))
         this.handleGetOrder()
@@ -26,6 +34,14 @@ class Order extends Component {
 
     componentDidMount() {
     }
+
+    // 拿到websocket 发来的信息后刷新订单列表
+    storeChange = () => {
+        if (store.getState()) {
+            this.handleGetOrder(1)
+        }
+    }
+
 
     componentWillUnmount(){
 		this.isUnmount = true;

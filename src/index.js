@@ -5,11 +5,19 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
+
+// import { createStore } from 'redux'
+// import message from './reducers/index'
+// const store = createStore(message)
+
 const axios = require('axios')
 
 ReactDOM.render(
     <Router>
-      <App></App>
+      {/* state={store.getState()}
+      onFresh={() => store.dispatch({ type: 'FRESHLIST' })}
+      onReFreshState={() => store.dispatch({ type: 'REFRESHLIST' })} */}
+      <App/>
     </Router>
     ,
     document.getElementById('root')

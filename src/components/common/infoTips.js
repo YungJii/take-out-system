@@ -2,80 +2,27 @@ import React,{Component} from 'react';
 import '../../scss/infoTips.scss';
 // const $ = require('jquery');
 import $ from 'jquery';
+// import { createStore } from 'redux'
+// import message from '../../reducers/index'
+// const store = createStore(message)
+import store from '../../reducers/index'
 
 class InfoTips extends Component{
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 		this.state={
 			clear_status: false,
 			status: 0,
 			active: false,
 			message: ''
 		}
+		
     }
 	
 	componentWillMount() {
 		if (window.localStorage.getItem('user_info') !== null) {
 			this.setWebSocket()
 		}
-		// console.log(localStorage.getItem('order_message'))
-		// console.log($)
-		// if (localStorage.getItem('order_message') !== null) {
-		// 	var status
-		// 	var tid = setInterval(() => {
-		// 		axios.post('/api/order/getOrderInfoByNum', {
-		// 			num: localStorage.getItem('order_message')
-		// 		})
-		// 		.then((res) => {
-		// 			status = res.data.message.status
-		// 			// console.log(res)
-		// 			console.log(status)
-		// 			if (status !== 0) {
-		// 				clearInterval(tid)
-		// 				this.setState({
-		// 					clear_status: true,
-		// 					status: status,
-		// 					active: true
-		// 				}, () => {
-		// 					setTimeout(() => {
-		// 						this.setState({
-		// 							active: false
-		// 						})
-		// 						localStorage.removeItem('order_message')
-		// 					}, 5000)
-		// 				})
-		// 			}
-		// 		})
-		// 	}, 1000)
-		// 	setTimeout(() => {
-		// 		if (this.state.clear_status === false) {
-		// 			console.log(tid)
-		// 			if (status === 0) {
-		// 				axios.post('/api/order/setOrderStatus', {
-		// 					num: localStorage.getItem('order_message')
-		// 				})
-		// 				.then((res) => {
-		// 					if (res.data.status === 200) {
-		// 						console.log('订单超时')
-		// 						this.setState({
-		// 							clear_status: true,
-		// 							status: 4,
-		// 							active: true
-		// 						}, () => {
-		// 							setTimeout(() => {
-		// 								this.setState({
-		// 									active: false
-		// 								})
-		// 							}, 5000)
-		// 						})
-		// 					}
-		// 				})
-		// 			}
-		// 			localStorage.removeItem('order_message')
-		// 			clearInterval(tid)
-		// 		}
-		// 	}, 30000)
-		// }
 	}
 
 	setWebSocket() {
@@ -90,12 +37,14 @@ class InfoTips extends Component{
                             console.log(data)
                         }, 'json');
                         break;
-                    default :
+					default :
+						store.dispatch({ type: 'FRESHLIST', fresh: true})
 						this.setState({
 							message: data.message,
 							active: true
 						},() => {
 							setTimeout(() => {
+								// console.log(store.getState()) 
 								this.setState({
 									active: false
 								})
@@ -115,8 +64,9 @@ class InfoTips extends Component{
 
 
 	render(){
-		console.log(this.state.clear_status)
-		console.log(this.state.status)
+		// console.log(this.state.clear_status)
+		// console.log(this.state.status)
+		
 		return(
 			<div className="tips_box">
 				<div className={`${this.state.message && this.state.active ? 'active' : 'hidden'} ${'success'}`}>

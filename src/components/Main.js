@@ -17,6 +17,9 @@ import ActivityDetails from './Content/activity/activityDetails.js'
 import Hall from './Content/hall/hall.js'
 import InfoTips from './common/infoTips.js'
 import '../scss/NavTabBar.scss';
+// import { createStore } from 'redux'
+// import message from '../reducers/index'
+// const store = createStore(message)
 
 class NavTabBar extends Component {
     constructor(props) {
@@ -49,7 +52,7 @@ class NavTabBar extends Component {
               <Route  path='/shop/:id' component={Shop}/>
               <Route  path='/activity' component={Activity}/>
               <Route  path='/activities/:id' component={AcDetails}/>
-              <Route  path="/shopOrder" component={ShopOrder} />
+              <Route  path="/shopOrder" component={ShopOrder}/>
               <Route  path='/search/:name' component={Search}/>
               <Route  path='/login' component={Login}/>
               <Route  path='/setting_info' component={Setting}/>
